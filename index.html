@@ -222,7 +222,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2020-11-27 22:24:04 / Modified: 22:28:33" itemprop="dateCreated datePublished" datetime="2020-11-27T22:24:04+08:00">2020-11-27</time>
+      <time title="Created: 2020-11-27 22:24:04 / Modified: 22:47:36" itemprop="dateCreated datePublished" datetime="2020-11-27T22:24:04+08:00">2020-11-27</time>
     </span>
 
   
@@ -238,12 +238,11 @@
           <hr>
 <p>title:PHP反序列化漏洞</p>
 <p>date:2020-11-27</p>
-<p>tags:练习</p>
-<h1 id="PHP反序列化漏洞"><a href="#PHP反序列化漏洞" class="headerlink" title="PHP反序列化漏洞"></a>PHP反序列化漏洞</h1><blockquote>
+<h2 id="tags-练习"><a href="#tags-练习" class="headerlink" title="tags:练习"></a>tags:练习</h2><h1 id="PHP反序列化漏洞"><a href="#PHP反序列化漏洞" class="headerlink" title="PHP反序列化漏洞"></a>PHP反序列化漏洞</h1><blockquote>
 <p>所有php里面的值都可以使用函数serialize()来返回一个包含字节流的字符串来表示。unserialize()函数能够重新把字符串变回php原来的值。 序列化一个对象将会保存对象的所有变量，但是不会保存对象的方法，只会保存类的名字。 ——php官方文档</p>
 </blockquote>
 <p>serialize可以将一个对象（变量）转换成可以传输的字符串，并且在转换的过程中可以保存当前变量的值；而unserialize可以将serialize生成的字符串再转换回变量。</p>
-<h3 id="序列化"><a href="#序列化" class="headerlink" title="序列化"></a>序列化</h3><p>举例：</p>
+<h3 id="序列化"><a href="#序列化" class="headerlink" title="序列化"></a>序列化</h3><p>举个例子：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class A&#123;</span><br><span class="line">    var $test &#x3D; &quot;&lt;img src&#x3D;1 onerror&#x3D;alert(1)&gt;&quot;;</span><br><span class="line">    function __wakeup()&#123;</span><br><span class="line">            echo $this-&gt;test;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$c &#x3D; new A();</span><br><span class="line">$c-&gt;age &#x3D; &quot;18&quot;;</span><br><span class="line">echo serialize($c);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
 
 <p>其中反序列化的a变量是可控的，并且一旦反序列化会自动执行魔法方法<code>__wakeup</code>并且输出test。</p>
@@ -333,7 +332,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-11-21 15:28:53" itemprop="dateModified" datetime="2020-11-21T15:28:53+08:00">2020-11-21</time>
+        <time title="Modified: 2020-11-27 22:54:21" itemprop="dateModified" datetime="2020-11-27T22:54:21+08:00">2020-11-27</time>
       </span>
 
   
@@ -346,7 +345,10 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="绿帽子商场"><a href="#绿帽子商场" class="headerlink" title="绿帽子商场"></a>绿帽子商场</h2><p>输入题目网址，出现商品及价格，第二行是我们要买的flag，1000元，而最后一行显示：你有500元。所以我们要想办法搞到1000，才能买到flag。</p>
+          <hr>
+<p>title:简单的计算题（python脚本）</p>
+<p>date:2020-11-18</p>
+<h2 id="tags-练习"><a href="#tags-练习" class="headerlink" title="tags:练习"></a>tags:练习</h2><h2 id="绿帽子商场"><a href="#绿帽子商场" class="headerlink" title="绿帽子商场"></a>绿帽子商场</h2><p>输入题目网址，出现商品及价格，第二行是我们要买的flag，1000元，而最后一行显示：你有500元。所以我们要想办法搞到1000，才能买到flag。</p>
 <p>打开代理，点击flag后面的buy按钮，打开Burp Suite</p>
 <p>需要加上session，如图：</p>
 <p><img src="https://gitee.com/chen-lishan/tuc/raw/master/1000..png"></p>
@@ -450,10 +452,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2020-11-01 01:22:13 / Modified: 15:09:55" itemprop="dateCreated datePublished" datetime="2020-11-01T01:22:13+08:00">2020-11-01</time>
+      <time title="Created: 2020-11-01 01:22:13" itemprop="dateCreated datePublished" datetime="2020-11-01T01:22:13+08:00">2020-11-01</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-11-27 22:53:31" itemprop="dateModified" datetime="2020-11-27T22:53:31+08:00">2020-11-27</time>
+      </span>
 
   
 </div>
@@ -465,7 +473,10 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="无参数RCE"><a href="#无参数RCE" class="headerlink" title="无参数RCE"></a>无参数RCE</h2><h3 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h3><p>题目源码：</p>
+          <hr>
+<p>title:无参数RCE</p>
+<p>date:2020-11-01</p>
+<h2 id="tags-练习"><a href="#tags-练习" class="headerlink" title="tags:练习"></a>tags:练习</h2><h2 id="无参数RCE"><a href="#无参数RCE" class="headerlink" title="无参数RCE"></a>无参数RCE</h2><h3 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h3><p>题目源码：</p>
 <p><img src="https://zhuang-yongyi.gitee.io/yoyo/ls/1.png"></p>
 <p>eval函数：php的任意代码执行</p>
 <p>GET传参，传入code参数，如果code经过正则匹配与“；”相等，就会执行eval，所以我们要看如何绕过正则，正则匹配到 <code>/[^\W]+\((?R)?\)/</code>  ，它会替换为空 ‘ ‘，然后会等于分号 ‘;’，（例如：?code=echo();      ?传参code，传入echo()，被替换为空的话，就等于分号）如果等于分号，就会绕过这个正则。</p>
@@ -582,10 +593,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2020-10-31 20:30:35 / Modified: 00:17:26" itemprop="dateCreated datePublished" datetime="2020-10-31T20:30:35+08:00">2020-10-31</time>
+      <time title="Created: 2020-10-31 20:30:35" itemprop="dateCreated datePublished" datetime="2020-10-31T20:30:35+08:00">2020-10-31</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2020-11-27 22:52:52" itemprop="dateModified" datetime="2020-11-27T22:52:52+08:00">2020-11-27</time>
+      </span>
 
   
 </div>
@@ -597,7 +614,10 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="文件上传漏洞"><a href="#文件上传漏洞" class="headerlink" title="文件上传漏洞"></a>文件上传漏洞</h1><p>文件上传漏洞是指用户上传了一个可执行的脚本文件，并通过此脚本文件获得了执行服务器端命令的能力。常见场景是web服务器允许用户上传图片或者普通文本文件保存，而用户绕过上传机制上传恶意代码并执行从而控制服务器。显然这种漏洞是getshell最快最直接的方法之一，需要说明的是上传文件操作本身是没有问题的，问题在于文件上传到服务器后，服务器怎么处理和解释文件。</p>
+          <hr>
+<p>title:文件上传漏洞</p>
+<p>date:2020-10-31</p>
+<h2 id="tags-练习"><a href="#tags-练习" class="headerlink" title="tags:练习"></a>tags:练习</h2><h1 id="文件上传漏洞"><a href="#文件上传漏洞" class="headerlink" title="文件上传漏洞"></a>文件上传漏洞</h1><p>文件上传漏洞是指用户上传了一个可执行的脚本文件，并通过此脚本文件获得了执行服务器端命令的能力。常见场景是web服务器允许用户上传图片或者普通文本文件保存，而用户绕过上传机制上传恶意代码并执行从而控制服务器。显然这种漏洞是getshell最快最直接的方法之一，需要说明的是上传文件操作本身是没有问题的，问题在于文件上传到服务器后，服务器怎么处理和解释文件。</p>
 <h4 id="上传漏洞的方式"><a href="#上传漏洞的方式" class="headerlink" title="上传漏洞的方式"></a>上传漏洞的方式</h4><p>上传漏洞有两种绕过方法：黑名单上传，白名单上传。</p>
 <p>1.黑名单上传</p>
 <p>黑名单上传的意思就是，它禁止了一些上传的格式，比如在它的规则内，php文件是禁止上传的，那么想要上传就需要用到一些方法。</p>
@@ -728,7 +748,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-10-19 22:40:04" itemprop="dateModified" datetime="2020-10-19T22:40:04+08:00">2020-10-19</time>
+        <time title="Modified: 2020-11-27 22:52:03" itemprop="dateModified" datetime="2020-11-27T22:52:03+08:00">2020-11-27</time>
       </span>
 
   
@@ -741,7 +761,10 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h3 id="PHP的4种标记风格"><a href="#PHP的4种标记风格" class="headerlink" title="PHP的4种标记风格"></a>PHP的4种标记风格</h3><h4 id="1-标准风格"><a href="#1-标准风格" class="headerlink" title="1.标准风格"></a>1.标准风格</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+          <hr>
+<p>title:PHP反序列化漏洞</p>
+<p>date:2020-10-31</p>
+<h2 id="tags-练习"><a href="#tags-练习" class="headerlink" title="tags:练习"></a>tags:练习</h2><h3 id="PHP的4种标记风格"><a href="#PHP的4种标记风格" class="headerlink" title="PHP的4种标记风格"></a>PHP的4种标记风格</h3><h4 id="1-标准风格"><a href="#1-标准风格" class="headerlink" title="1.标准风格"></a>1.标准风格</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
 
 
 

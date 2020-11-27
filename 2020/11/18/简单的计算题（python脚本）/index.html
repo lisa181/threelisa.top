@@ -22,12 +22,12 @@
     var CONFIG = {"hostname":"-181.github.io","root":"/","scheme":"Mist","version":"8.0.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
   </script>
 
-  <meta name="description" content="绿帽子商场输入题目网址，出现商品及价格，第二行是我们要买的flag，1000元，而最后一行显示：你有500元。所以我们要想办法搞到1000，才能买到flag。 打开代理，点击flag后面的buy按钮，打开Burp Suite 需要加上session，如图：  点击GO之后，显示钱不够。 那么，我们可以买雪碧 将flag改为xuebi，price仍为1000，原有的500-1000&#x3D;-500，如图">
+  <meta name="description" content="title:简单的计算题（python脚本） date:2020-11-18 tags:练习绿帽子商场输入题目网址，出现商品及价格，第二行是我们要买的flag，1000元，而最后一行显示：你有500元。所以我们要想办法搞到1000，才能买到flag。 打开代理，点击flag后面的buy按钮，打开Burp Suite 需要加上session，如图：  点击GO之后，显示钱不够。 那么，我们可以买雪">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo">
 <meta property="og:url" content="https://-181.github.io/2020/11/18/%E7%AE%80%E5%8D%95%E7%9A%84%E8%AE%A1%E7%AE%97%E9%A2%98%EF%BC%88python%E8%84%9A%E6%9C%AC%EF%BC%89/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="绿帽子商场输入题目网址，出现商品及价格，第二行是我们要买的flag，1000元，而最后一行显示：你有500元。所以我们要想办法搞到1000，才能买到flag。 打开代理，点击flag后面的buy按钮，打开Burp Suite 需要加上session，如图：  点击GO之后，显示钱不够。 那么，我们可以买雪碧 将flag改为xuebi，price仍为1000，原有的500-1000&#x3D;-500，如图">
+<meta property="og:description" content="title:简单的计算题（python脚本） date:2020-11-18 tags:练习绿帽子商场输入题目网址，出现商品及价格，第二行是我们要买的flag，1000元，而最后一行显示：你有500元。所以我们要想办法搞到1000，才能买到flag。 打开代理，点击flag后面的buy按钮，打开Burp Suite 需要加上session，如图：  点击GO之后，显示钱不够。 那么，我们可以买雪">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://gitee.com/chen-lishan/tuc/raw/master/1000..png">
 <meta property="og:image" content="https://gitee.com/chen-lishan/tuc/raw/master/%E9%9B%AA%E7%A2%A71.png">
@@ -38,7 +38,7 @@
 <meta property="og:image" content="https://gitee.com/chen-lishan/tuc/raw/master/pawangzhi.png">
 <meta property="og:image" content="https://gitee.com/chen-lishan/tuc/raw/master/%E6%9C%80%E7%BB%88%E7%BB%93%E6%9E%9C.png">
 <meta property="article:published_time" content="2020-11-18T02:37:59.149Z">
-<meta property="article:modified_time" content="2020-11-21T07:28:53.477Z">
+<meta property="article:modified_time" content="2020-11-27T14:54:21.717Z">
 <meta property="article:author" content="lisa">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://gitee.com/chen-lishan/tuc/raw/master/1000..png">
@@ -157,7 +157,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%BF%E5%B8%BD%E5%AD%90%E5%95%86%E5%9C%BA"><span class="nav-number">1.</span> <span class="nav-text">绿帽子商场</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E7%9A%84%E8%AE%A1%E7%AE%97%E9%A2%98"><span class="nav-number">2.</span> <span class="nav-text">简单的计算题</span></a></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#tags-%E7%BB%83%E4%B9%A0"><span class="nav-number">1.</span> <span class="nav-text">tags:练习</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%BF%E5%B8%BD%E5%AD%90%E5%95%86%E5%9C%BA"><span class="nav-number">2.</span> <span class="nav-text">绿帽子商场</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E7%9A%84%E8%AE%A1%E7%AE%97%E9%A2%98"><span class="nav-number">3.</span> <span class="nav-text">简单的计算题</span></a></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -242,7 +242,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-11-21 15:28:53" itemprop="dateModified" datetime="2020-11-21T15:28:53+08:00">2020-11-21</time>
+        <time title="Modified: 2020-11-27 22:54:21" itemprop="dateModified" datetime="2020-11-27T22:54:21+08:00">2020-11-27</time>
       </span>
 
   
@@ -255,7 +255,10 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="绿帽子商场"><a href="#绿帽子商场" class="headerlink" title="绿帽子商场"></a>绿帽子商场</h2><p>输入题目网址，出现商品及价格，第二行是我们要买的flag，1000元，而最后一行显示：你有500元。所以我们要想办法搞到1000，才能买到flag。</p>
+        <hr>
+<p>title:简单的计算题（python脚本）</p>
+<p>date:2020-11-18</p>
+<h2 id="tags-练习"><a href="#tags-练习" class="headerlink" title="tags:练习"></a>tags:练习</h2><h2 id="绿帽子商场"><a href="#绿帽子商场" class="headerlink" title="绿帽子商场"></a>绿帽子商场</h2><p>输入题目网址，出现商品及价格，第二行是我们要买的flag，1000元，而最后一行显示：你有500元。所以我们要想办法搞到1000，才能买到flag。</p>
 <p>打开代理，点击flag后面的buy按钮，打开Burp Suite</p>
 <p>需要加上session，如图：</p>
 <p><img src="https://gitee.com/chen-lishan/tuc/raw/master/1000..png"></p>
