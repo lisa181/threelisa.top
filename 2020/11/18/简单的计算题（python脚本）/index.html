@@ -22,12 +22,12 @@
     var CONFIG = {"hostname":"-181.github.io","root":"/","scheme":"Mist","version":"8.0.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
   </script>
 
-  <meta name="description" content="title:简单的计算题（python脚本） date:2020-11-18 tags:练习绿帽子商场输入题目网址，出现商品及价格，第二行是我们要买的flag，1000元，而最后一行显示：你有500元。所以我们要想办法搞到1000，才能买到flag。 打开代理，点击flag后面的buy按钮，打开Burp Suite 需要加上session，如图：  点击GO之后，显示钱不够。 那么，我们可以买雪">
+  <meta name="description" content="绿帽子商场输入题目网址，出现商品及价格，第二行是我们要买的flag，1000元，而最后一行显示：你有500元。所以我们要想办法搞到1000，才能买到flag。 打开代理，点击flag后面的buy按钮，打开Burp Suite 需要加上session，如图：  点击GO之后，显示钱不够。 那么，我们可以买雪碧 将flag改为xuebi，price仍为1000，原有的500-1000&#x3D;-500，如图">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo">
+<meta property="og:title" content="简单的计算题（python脚本）">
 <meta property="og:url" content="https://-181.github.io/2020/11/18/%E7%AE%80%E5%8D%95%E7%9A%84%E8%AE%A1%E7%AE%97%E9%A2%98%EF%BC%88python%E8%84%9A%E6%9C%AC%EF%BC%89/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="title:简单的计算题（python脚本） date:2020-11-18 tags:练习绿帽子商场输入题目网址，出现商品及价格，第二行是我们要买的flag，1000元，而最后一行显示：你有500元。所以我们要想办法搞到1000，才能买到flag。 打开代理，点击flag后面的buy按钮，打开Burp Suite 需要加上session，如图：  点击GO之后，显示钱不够。 那么，我们可以买雪">
+<meta property="og:description" content="绿帽子商场输入题目网址，出现商品及价格，第二行是我们要买的flag，1000元，而最后一行显示：你有500元。所以我们要想办法搞到1000，才能买到flag。 打开代理，点击flag后面的buy按钮，打开Burp Suite 需要加上session，如图：  点击GO之后，显示钱不够。 那么，我们可以买雪碧 将flag改为xuebi，price仍为1000，原有的500-1000&#x3D;-500，如图">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://gitee.com/chen-lishan/tuc/raw/master/1000..png">
 <meta property="og:image" content="https://gitee.com/chen-lishan/tuc/raw/master/%E9%9B%AA%E7%A2%A71.png">
@@ -37,9 +37,10 @@
 <meta property="og:image" content="https://gitee.com/chen-lishan/tuc/raw/master/biaodashi..png">
 <meta property="og:image" content="https://gitee.com/chen-lishan/tuc/raw/master/pawangzhi.png">
 <meta property="og:image" content="https://gitee.com/chen-lishan/tuc/raw/master/%E6%9C%80%E7%BB%88%E7%BB%93%E6%9E%9C.png">
-<meta property="article:published_time" content="2020-11-18T02:37:59.149Z">
-<meta property="article:modified_time" content="2020-11-27T14:54:21.717Z">
+<meta property="article:published_time" content="2020-11-17T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-11-29T04:24:36.233Z">
 <meta property="article:author" content="lisa">
+<meta property="article:tag" content="练习">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://gitee.com/chen-lishan/tuc/raw/master/1000..png">
 
@@ -57,7 +58,7 @@
   };
 </script>
 
-  <title> | Hexo</title>
+  <title>简单的计算题（python脚本） | Hexo</title>
   
 
 
@@ -157,7 +158,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#tags-%E7%BB%83%E4%B9%A0"><span class="nav-number">1.</span> <span class="nav-text">tags:练习</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%BF%E5%B8%BD%E5%AD%90%E5%95%86%E5%9C%BA"><span class="nav-number">2.</span> <span class="nav-text">绿帽子商场</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E7%9A%84%E8%AE%A1%E7%AE%97%E9%A2%98"><span class="nav-number">3.</span> <span class="nav-text">简单的计算题</span></a></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%BF%E5%B8%BD%E5%AD%90%E5%95%86%E5%9C%BA"><span class="nav-number">1.</span> <span class="nav-text">绿帽子商场</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E7%9A%84%E8%AE%A1%E7%AE%97%E9%A2%98"><span class="nav-number">2.</span> <span class="nav-text">简单的计算题</span></a></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -228,7 +229,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          
+          简单的计算题（python脚本）
         </h1>
 
         <div class="post-meta-container">
@@ -239,14 +240,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2020-11-18 10:37:59" itemprop="dateCreated datePublished" datetime="2020-11-18T10:37:59+08:00">2020-11-18</time>
+      <time title="Created: 2020-11-18 00:00:00" itemprop="dateCreated datePublished" datetime="2020-11-18T00:00:00+08:00">2020-11-18</time>
     </span>
       <span class="post-meta-item">
         <span class="post-meta-item-icon">
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-11-27 22:54:21" itemprop="dateModified" datetime="2020-11-27T22:54:21+08:00">2020-11-27</time>
+        <time title="Modified: 2020-11-29 12:24:36" itemprop="dateModified" datetime="2020-11-29T12:24:36+08:00">2020-11-29</time>
       </span>
 
   
@@ -259,10 +260,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <hr>
-<p>title:简单的计算题（python脚本）</p>
-<p>date:2020-11-18</p>
-<h2 id="tags-练习"><a href="#tags-练习" class="headerlink" title="tags:练习"></a>tags:练习</h2><h2 id="绿帽子商场"><a href="#绿帽子商场" class="headerlink" title="绿帽子商场"></a>绿帽子商场</h2><p>输入题目网址，出现商品及价格，第二行是我们要买的flag，1000元，而最后一行显示：你有500元。所以我们要想办法搞到1000，才能买到flag。</p>
+        <h2 id="绿帽子商场"><a href="#绿帽子商场" class="headerlink" title="绿帽子商场"></a>绿帽子商场</h2><p>输入题目网址，出现商品及价格，第二行是我们要买的flag，1000元，而最后一行显示：你有500元。所以我们要想办法搞到1000，才能买到flag。</p>
 <p>打开代理，点击flag后面的buy按钮，打开Burp Suite</p>
 <p>需要加上session，如图：</p>
 <p><img src="https://gitee.com/chen-lishan/tuc/raw/master/1000..png"></p>
@@ -324,13 +322,16 @@
     
 
     <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%BB%83%E4%B9%A0/" rel="tag"># 练习</a>
+          </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2020/11/01/%E6%97%A0%E5%8F%82%E6%95%B0RCE/" rel="prev" title="">
-                  <i class="fa fa-chevron-left"></i> 
+                <a href="/2020/11/01/%E6%97%A0%E5%8F%82%E6%95%B0RCE/" rel="prev" title="无参数RCE">
+                  <i class="fa fa-chevron-left"></i> 无参数RCE
                 </a>
             </div>
             <div class="post-nav-item">
