@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
@@ -19,16 +19,16 @@
 
 <script class="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"-181.github.io","root":"/","scheme":"Mist","version":"8.0.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
+    var CONFIG = {"hostname":"-181.github.io","root":"/","scheme":"Pisces","version":"8.0.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
   </script>
 
   <meta name="description" content="无参数RCE题目分析题目源码：  eval函数：php的任意代码执行 GET传参，传入code参数，如果code经过正则匹配与“；”相等，就会执行eval，所以我们要看如何绕过正则，正则匹配到 &#x2F;[^\W]+\((?R)?\)&#x2F;  ，它会替换为空 ‘ ‘，然后会等于分号 ‘;’，（例如：?code&#x3D;echo();      ?传参code，传入echo()，被替换为空的话，就等于分号）如果等于分号">
 <meta property="og:type" content="article">
 <meta property="og:title" content="无参数RCE">
 <meta property="og:url" content="https://-181.github.io/2020/11/01/%E6%97%A0%E5%8F%82%E6%95%B0RCE/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="左">
 <meta property="og:description" content="无参数RCE题目分析题目源码：  eval函数：php的任意代码执行 GET传参，传入code参数，如果code经过正则匹配与“；”相等，就会执行eval，所以我们要看如何绕过正则，正则匹配到 &#x2F;[^\W]+\((?R)?\)&#x2F;  ，它会替换为空 ‘ ‘，然后会等于分号 ‘;’，（例如：?code&#x3D;echo();      ?传参code，传入echo()，被替换为空的话，就等于分号）如果等于分号">
-<meta property="og:locale" content="en_US">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://zhuang-yongyi.gitee.io/yoyo/ls/1.png">
 <meta property="og:image" content="https://zhuang-yongyi.gitee.io/yoyo/ls/echo.jpg">
 <meta property="og:image" content="https://zhuang-yongyi.gitee.io/yoyo/ls/123.jpg">
@@ -40,7 +40,7 @@
 <meta property="og:image" content="https://zhuang-yongyi.gitee.io/yoyo/ls/cat.jpg">
 <meta property="article:published_time" content="2020-10-31T16:00:00.000Z">
 <meta property="article:modified_time" content="2020-11-29T04:25:10.287Z">
-<meta property="article:author" content="lisa">
+<meta property="article:author" content="左">
 <meta property="article:tag" content="练习">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://zhuang-yongyi.gitee.io/yoyo/ls/1.png">
@@ -55,11 +55,11 @@
     sidebar: "",
     isHome : false,
     isPost : true,
-    lang   : 'en'
+    lang   : 'zh-CN'
   };
 </script>
 
-  <title>无参数RCE | Hexo</title>
+  <title>无参数RCE | 左</title>
   
 
 
@@ -111,7 +111,10 @@
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
+    <div class="toggle" aria-label="切换导航栏">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
@@ -119,9 +122,10 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">Hexo</h1>
+      <h1 class="site-title">左</h1>
       <i class="logo-line"></i>
     </a>
+      <p class="site-subtitle" itemprop="description">春有百花秋有月， 夏有凉风冬有雪</p>
   </div>
 
   <div class="site-nav-right">
@@ -132,6 +136,30 @@
 
 
 
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
 
 
 
@@ -150,10 +178,10 @@
     <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
-          Table of Contents
+          文章目录
         </li>
         <li class="sidebar-nav-overview">
-          Overview
+          站点概览
         </li>
       </ul>
 
@@ -165,20 +193,23 @@
 
       <section class="site-overview-wrap sidebar-panel">
         <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">lisa</p>
+    <img class="site-author-image" itemprop="image" alt="左"
+      src="/image/avatar.jpg">
+  <p class="site-author-name" itemprop="name">左</p>
   <div class="site-description" itemprop="description"></div>
 </div>
 <div class="site-state-wrap site-overview-item animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/archives">
+          <a href="/archives/">
+        
           <span class="site-state-item-count">7</span>
-          <span class="site-state-item-name">posts</span>
+          <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
         <span class="site-state-item-count">1</span>
-        <span class="site-state-item-name">tags</span>
+        <span class="site-state-item-name">标签</span>
       </div>
   </nav>
 </div>
@@ -216,17 +247,17 @@
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://-181.github.io/2020/11/01/%E6%97%A0%E5%8F%82%E6%95%B0RCE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="lisa">
+      <meta itemprop="image" content="/image/avatar.jpg">
+      <meta itemprop="name" content="左">
       <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="左">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -239,16 +270,16 @@
       <span class="post-meta-item-icon">
         <i class="far fa-calendar"></i>
       </span>
-      <span class="post-meta-item-text">Posted on</span>
+      <span class="post-meta-item-text">发表于</span>
 
-      <time title="Created: 2020-11-01 00:00:00" itemprop="dateCreated datePublished" datetime="2020-11-01T00:00:00+08:00">2020-11-01</time>
+      <time title="创建时间：2020-11-01 00:00:00" itemprop="dateCreated datePublished" datetime="2020-11-01T00:00:00+08:00">2020-11-01</time>
     </span>
       <span class="post-meta-item">
         <span class="post-meta-item-icon">
           <i class="far fa-calendar-check"></i>
         </span>
-        <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2020-11-29 12:25:10" itemprop="dateModified" datetime="2020-11-29T12:25:10+08:00">2020-11-29</time>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-11-29 12:25:10" itemprop="dateModified" datetime="2020-11-29T12:25:10+08:00">2020-11-29</time>
       </span>
 
   
@@ -403,9 +434,9 @@
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">lisa</span>
+  <span class="author" itemprop="copyrightHolder">左</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
   </div>
 
     </div>
@@ -413,7 +444,7 @@
 
   
   <script src="//cdn.jsdelivr.net/npm/animejs@3.2.0/lib/anime.min.js"></script>
-<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
 
   
 
