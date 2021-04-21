@@ -31,9 +31,10 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://gitee.com/chen-lishan/tuc/raw/master/cat1.png">
 <meta property="og:image" content="https://gitee.com/chen-lishan/tuc/raw/master/cat-1.png">
+<meta property="og:image" content="https://gitee.com/chen-lishan/tuc/raw/master/positions.png">
 <meta property="og:image" content="https://gitee.com/chen-lishan/tuc/raw/master/3.png">
 <meta property="article:published_time" content="2021-01-31T13:27:10.059Z">
-<meta property="article:modified_time" content="2021-01-31T14:53:16.224Z">
+<meta property="article:modified_time" content="2021-02-09T04:10:01.288Z">
 <meta property="article:author" content="左">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://gitee.com/chen-lishan/tuc/raw/master/cat1.png">
@@ -180,7 +181,7 @@
 
       <!--noindex-->
       <section class="post-toc-wrap sidebar-panel">
-          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL%E7%9B%B2%E6%B3%A8"><span class="nav-number">1.</span> <span class="nav-text">SQL盲注</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0"><span class="nav-number">1.0.1.</span> <span class="nav-text">常用函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%B2%E6%B3%A8%E7%9A%84%E4%B8%89%E7%A7%8D%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.0.2.</span> <span class="nav-text">盲注的三种类型</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bool%E5%9E%8B%E7%9B%B2%E6%B3%A8"><span class="nav-number">2.</span> <span class="nav-text">bool型盲注</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0"><span class="nav-number">3.</span> <span class="nav-text">函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#if%E5%87%BD%E6%95%B0"><span class="nav-number">3.1.</span> <span class="nav-text">if函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ST-GeomFromText"><span class="nav-number">3.2.</span> <span class="nav-text">ST_GeomFromText</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8F%8F%E8%BF%B0"><span class="nav-number">3.2.0.1.</span> <span class="nav-text">描述</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%A3%B0%E6%98%8E"><span class="nav-number">3.2.0.2.</span> <span class="nav-text">函数声明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B"><span class="nav-number">3.2.0.3.</span> <span class="nav-text">使用示例</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ST-MPointFromText"><span class="nav-number">3.3.</span> <span class="nav-text">ST_MPointFromText</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8F%8F%E8%BF%B0-1"><span class="nav-number">3.3.0.1.</span> <span class="nav-text">描述</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%A3%B0%E6%98%8E-1"><span class="nav-number">3.3.0.2.</span> <span class="nav-text">函数声明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B-1"><span class="nav-number">3.3.0.3.</span> <span class="nav-text">使用示例</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E5%8F%AF%E2%BD%A4%E5%87%BD%E6%95%B0"><span class="nav-number">3.4.</span> <span class="nav-text">其他可⽤函数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Python%E8%84%9A%E6%9C%AC"><span class="nav-number">3.4.0.1.</span> <span class="nav-text">Python脚本</span></a></li></ol></li></ol></li></ol></li></ol></div>
+          <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL%E7%9B%B2%E6%B3%A8"><span class="nav-number">1.</span> <span class="nav-text">SQL盲注</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0"><span class="nav-number">1.0.1.</span> <span class="nav-text">常用函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%B2%E6%B3%A8%E7%9A%84%E4%B8%89%E7%A7%8D%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.0.2.</span> <span class="nav-text">盲注的三种类型</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bool%E5%9E%8B%E7%9B%B2%E6%B3%A8"><span class="nav-number">2.</span> <span class="nav-text">bool型盲注</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#burpsuite%E7%88%86%E7%A0%B4fuzz"><span class="nav-number">2.0.0.1.</span> <span class="nav-text">burpsuite爆破fuzz</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0"><span class="nav-number">3.</span> <span class="nav-text">函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#if%E5%87%BD%E6%95%B0"><span class="nav-number">3.1.</span> <span class="nav-text">if函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ST-GeomFromText"><span class="nav-number">3.2.</span> <span class="nav-text">ST_GeomFromText</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8F%8F%E8%BF%B0"><span class="nav-number">3.2.0.1.</span> <span class="nav-text">描述</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%A3%B0%E6%98%8E"><span class="nav-number">3.2.0.2.</span> <span class="nav-text">函数声明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B"><span class="nav-number">3.2.0.3.</span> <span class="nav-text">使用示例</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ST-MPointFromText"><span class="nav-number">3.3.</span> <span class="nav-text">ST_MPointFromText</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8F%8F%E8%BF%B0-1"><span class="nav-number">3.3.0.1.</span> <span class="nav-text">描述</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%A3%B0%E6%98%8E-1"><span class="nav-number">3.3.0.2.</span> <span class="nav-text">函数声明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B-1"><span class="nav-number">3.3.0.3.</span> <span class="nav-text">使用示例</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E5%8F%AF%E2%BD%A4%E5%87%BD%E6%95%B0"><span class="nav-number">3.4.</span> <span class="nav-text">其他可⽤函数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Python%E8%84%9A%E6%9C%AC"><span class="nav-number">3.4.0.1.</span> <span class="nav-text">Python脚本</span></a></li></ol></li></ol></li></ol></li></ol></div>
       </section>
       <!--/noindex-->
 
@@ -196,7 +197,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-count">14</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -264,10 +265,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-01-31 21:27:10 / 修改时间：22:53:16" itemprop="dateCreated datePublished" datetime="2021-01-31T21:27:10+08:00">2021-01-31</time>
+      <time title="创建时间：2021-01-31 21:27:10" itemprop="dateCreated datePublished" datetime="2021-01-31T21:27:10+08:00">2021-01-31</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-02-09 12:10:01" itemprop="dateModified" datetime="2021-02-09T12:10:01+08:00">2021-02-09</time>
+      </span>
 
   
 </div>
@@ -297,6 +304,10 @@
 <p>因此可以想到bool盲注</p>
 <p>通过不断测试，可以知道，当输入的内容不包含过滤时，返回cat.png；当输入含有过滤的字符时，返回的是nono.png；当输入的sql查询语句有误且不包含过滤字符时，返回空白页面。</p>
 <p>借此可以FUZZ出被过滤掉的字符：</p>
+<h5 id="burpsuite爆破fuzz"><a href="#burpsuite爆破fuzz" class="headerlink" title="burpsuite爆破fuzz"></a>burpsuite爆破fuzz</h5><p>抓包，右键Send to Intruder，点击Intruder，可以看到Target的host中有IP地址；点击Positions，Clear清除被选中的绿色部分；</p>
+<p><img src="https://gitee.com/chen-lishan/tuc/raw/master/positions.png"></p>
+<p>由于经常用cat=1‘来测试，可以想到，标记1后面<code>‘</code>的位置，选中之后点击Add；点击Payloads，由于是SQL数据库，我们选择自带的字典，Add from list中的Fuzzing - SQL，然后点击右上方的【Start attack】进行跑字典爆破攻击 ；</p>
+<p>点击Length按长度排序 ，根据返回包长度可以分辨不同的情况：202是password error，200是no such user!，还有189是naive。点选不同结果的某条攻击结果。</p>
 <p><code>union</code> <code>*</code> <code> &#39;</code> <code>&quot;</code> <code>substr</code> <code>mid</code> <code>=</code> <code>like</code> <code>into</code> <code>file</code> <code>sleep</code> <code>benchmark</code> <code>^</code> <code>or</code> <code>空格</code> <code>&amp;</code> <code>&gt;</code> <code>&lt;</code> <code>#</code> <code>-</code> <code>ascii</code> <code>ord</code></p>
 <p>这里过滤了空格，可以直接<code>\t</code>来代替空格，也就是<code>%09</code>,在写脚本时候可以使⽤<code>TAB</code>键来代替。</p>
 <p>同时过滤了单双引号，可以使⽤⼗六进制来代替字符串。</p>
@@ -341,11 +352,14 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2020/12/24/SQL%E6%B3%A8%E5%85%A5%E6%BC%8F%E6%B4%9E/" rel="prev" title="SQL注入漏洞">
-                  <i class="fa fa-chevron-left"></i> SQL注入漏洞
+                <a href="/2020/12/23/PHP%E6%AD%A3%E5%88%99%E5%8C%B9%E9%85%8D%E5%90%8E%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E7%9A%84%E4%B8%80%E4%BA%9B%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95/" rel="prev" title="PHP正则匹配后代码执行的一些绕过方法">
+                  <i class="fa fa-chevron-left"></i> PHP正则匹配后代码执行的一些绕过方法
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2021/04/05/%E5%87%A0%E9%81%93%E9%A2%98/" rel="next" title="">
+                   <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
     </footer>

