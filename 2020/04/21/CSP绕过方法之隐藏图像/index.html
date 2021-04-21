@@ -24,22 +24,22 @@
 
   <meta name="description" content="CSP绕过方法之隐藏图像XSS漏洞中，可使用CSP绕过。 CSP 的实质就是白名单制度，开发者明确告诉客户端，哪些外部资源可以加载和执行，等同于提供白名单。 CSP绕过原理：利用HTML Canvas将恶意JavaScript代码转化为PNG图像，以隐藏恶意代码；然后将图像上传至正规网站，如Twitter或Google(通常由CSP列入白名单)；再利用canvas getImageData方法，从">
 <meta property="og:type" content="article">
-<meta property="og:title" content="左">
-<meta property="og:url" content="https://-181.github.io/2021/04/21/CSP%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95%E4%B9%8B%E9%9A%90%E8%97%8F%E5%9B%BE%E5%83%8F/index.html">
+<meta property="og:title" content="CSP绕过方法之隐藏图像">
+<meta property="og:url" content="https://-181.github.io/2020/04/21/CSP%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95%E4%B9%8B%E9%9A%90%E8%97%8F%E5%9B%BE%E5%83%8F/index.html">
 <meta property="og:site_name" content="左">
 <meta property="og:description" content="CSP绕过方法之隐藏图像XSS漏洞中，可使用CSP绕过。 CSP 的实质就是白名单制度，开发者明确告诉客户端，哪些外部资源可以加载和执行，等同于提供白名单。 CSP绕过原理：利用HTML Canvas将恶意JavaScript代码转化为PNG图像，以隐藏恶意代码；然后将图像上传至正规网站，如Twitter或Google(通常由CSP列入白名单)；再利用canvas getImageData方法，从">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://gitee.com/chen-lishan/tuc/raw/master/%E6%8E%A7%E5%88%B6%E5%8F%B0.png">
 <meta property="og:image" content="https://gitee.com/chen-lishan/tuc/raw/master/hello.png">
 <meta property="og:image" content="https://gitee.com/chen-lishan/tuc/raw/master/%E5%9B%BE%E7%89%87.png">
-<meta property="article:published_time" content="2021-04-21T15:55:17.557Z">
-<meta property="article:modified_time" content="2021-04-21T15:55:17.558Z">
+<meta property="article:published_time" content="2020-04-20T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-04-21T16:21:07.001Z">
 <meta property="article:author" content="左">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://gitee.com/chen-lishan/tuc/raw/master/%E6%8E%A7%E5%88%B6%E5%8F%B0.png">
 
 
-<link rel="canonical" href="https://-181.github.io/2021/04/21/CSP%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95%E4%B9%8B%E9%9A%90%E8%97%8F%E5%9B%BE%E5%83%8F/">
+<link rel="canonical" href="https://-181.github.io/2020/04/21/CSP%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95%E4%B9%8B%E9%9A%90%E8%97%8F%E5%9B%BE%E5%83%8F/">
 
 
 <script class="page-configurations">
@@ -52,7 +52,7 @@
   };
 </script>
 
-  <title> | 左</title>
+  <title>CSP绕过方法之隐藏图像 | 左</title>
   
 
 
@@ -241,7 +241,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://-181.github.io/2021/04/21/CSP%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95%E4%B9%8B%E9%9A%90%E8%97%8F%E5%9B%BE%E5%83%8F/">
+    <link itemprop="mainEntityOfPage" href="https://-181.github.io/2020/04/21/CSP%E7%BB%95%E8%BF%87%E6%96%B9%E6%B3%95%E4%B9%8B%E9%9A%90%E8%97%8F%E5%9B%BE%E5%83%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/image/avatar.jpg">
@@ -254,7 +254,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          
+          CSP绕过方法之隐藏图像
         </h1>
 
         <div class="post-meta-container">
@@ -265,8 +265,15 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2021-04-21 23:55:17" itemprop="dateCreated datePublished" datetime="2021-04-21T23:55:17+08:00">2021-04-21</time>
+      <time title="创建时间：2020-04-21 00:00:00" itemprop="dateCreated datePublished" datetime="2020-04-21T00:00:00+08:00">2020-04-21</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-04-22 00:21:07" itemprop="dateModified" datetime="2021-04-22T00:21:07+08:00">2021-04-22</time>
+      </span>
 
   
 </div>
@@ -327,11 +334,11 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2021/04/15/%E7%AC%AC%E5%9B%9B%E5%B1%8A%E6%B5%B7%E5%95%B8%E6%9D%AF/" rel="prev" title="">
-                  <i class="fa fa-chevron-left"></i> 
-                </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2020/10/31/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E/" rel="next" title="文件上传漏洞">
+                  文件上传漏洞 <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
     </footer>
